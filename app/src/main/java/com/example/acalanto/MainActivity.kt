@@ -23,17 +23,16 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AcalantoTheme {
-                    Surface(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
-                    ) {
-                        val navController = rememberNavController()
-                        Navigation(navController = navController)
-                    }
-                }
+                Surface(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    val navController = rememberNavController()
+                    Navigation(navController = navController) }
             }
         }
     }
 }
+
 
