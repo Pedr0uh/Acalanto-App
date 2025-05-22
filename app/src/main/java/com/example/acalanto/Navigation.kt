@@ -8,9 +8,9 @@ import androidx.navigation.compose.rememberNavController
 
 
 sealed class Screen(val route: String) {
-    object Splash : Screen("splash")
-    object Home : Screen("home")
-    object Music : Screen("music")
+    data object Splash : Screen("splash")
+    data object Home : Screen("home")
+    data object Music : Screen("music")
 }
 
 @Composable

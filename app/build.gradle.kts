@@ -41,6 +41,8 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.navigation.testing.android)
+    androidTestImplementation(libs.androidx.navigation.testing)
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.testing.TestNavHostController
 import kotlinx.coroutines.delay
 
 @Composable
@@ -74,7 +75,7 @@ fun SplashPage(navController: NavController){
 @Composable
 fun SplashPreview(){
     SplashPage(
-        navController = rememberNavController()
+        navController = TestNavHostController(LocalContext.current)
     )
 }
 
