@@ -26,7 +26,7 @@ fun Navigation(navController: NavHostController = rememberNavController()){
             HomePage(navController = navController)
         }
         composable(Screen.Music.route){
-
+            MusicPage(navController = navController)
         }
     }
 }

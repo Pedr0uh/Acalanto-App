@@ -41,8 +41,7 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.navigation.testing.android)
-    androidTestImplementation(libs.androidx.navigation.testing)
+    implementation ("androidx.compose.material:material-icons-extended")
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -53,7 +52,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.runtime.android)
-    implementation(libs.androidx.navigation.compose.jvmstubs)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

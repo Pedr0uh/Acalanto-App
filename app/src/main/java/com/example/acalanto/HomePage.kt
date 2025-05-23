@@ -1,5 +1,6 @@
 package com.example.acalanto
 
+import android.content.Context
 import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
@@ -24,12 +25,12 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.testing.TestNavHostController
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
+class FakeNavController(context: Context): NavController(context)
 
 @Composable
 fun HomePage(navController: NavController) {
@@ -40,11 +41,50 @@ fun HomePage(navController: NavController) {
         )
     }
 
+    val frases = listOf(
+        "Você é mais forte do que imagina.",
+        "Cada pequeno passo te aproxima do seu sonho.",
+        "Respire fundo. Tudo vai ficar bem.",
+        "Confie no processo. Você está evoluindo.",
+        "Hoje é um bom dia para recomeçar.",
+        "Permita-se descansar. Você merece paz.",
+        "Seu esforço está te levando longe.",
+        "Acalme o coração. O tempo vai colocar tudo no lugar.",
+        "Seja gentil com você mesmo.",
+        "Acredite: dias leves virão.",
+        "Você está exatamente onde deveria estar.",
+        "Tudo bem ir devagar, o importante é não parar.",
+        "A sua jornada é única. Respeite seu ritmo.",
+        "Sinta orgulho de quem você está se tornando.",
+        "A luz que você procura também está dentro de você."
+    )
+
+    val frases2 = listOf(
+        "Mesmo nos dias difíceis, sua coragem aparece em silêncio.",
+        "Continue, mesmo quando parecer lento. Você está indo bem.",
+        "Às vezes, só parar e respirar já muda tudo ao redor.",
+        "A mudança acontece devagar, mas acontece.",
+        "O passado ficou pra trás — o agora é uma nova chance.",
+        "O mundo pode esperar um pouco enquanto você se cuida.",
+        "Você planta hoje a calma que vai colher amanhã.",
+        "A vida também floresce no seu tempo certo.",
+        "A forma como você se trata muda tudo ao redor.",
+        "Confie que o caminho vai te mostrar o próximo passo.",
+        "A constância vale mais do que a velocidade.",
+        "Comparar-se apaga sua luz. Caminhe com leveza.",
+        "Cada dia você constrói uma versão mais forte de si mesmo.",
+        "Ela brilha mais quando você se ouve com carinho."
+        )
+
+    val fraseAleatoria = remember { frases.random() }
+
+    val fraseAleatoria2 = remember { frases2.random() }
+
     Column(
         modifier = Modifier.fillMaxSize()
             .background(Color(0XFFFFFEFC)),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceAround
+        verticalArrangement = Arrangement.SpaceEvenly
     ){
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
@@ -66,7 +106,15 @@ fun HomePage(navController: NavController) {
             )
         }
         Text(
-            text = "Cada pequeno passo te aproxima do seu sonho",
+            text = fraseAleatoria,
+            fontSize = 17.sp,
+            textAlign = TextAlign.Center,
+            fontFamily = poppinsFamily,
+            modifier = Modifier
+                .padding(24.dp)
+        )
+        Text(
+            text = fraseAleatoria2,
             fontSize = 17.sp,
             textAlign = TextAlign.Center,
             fontFamily = poppinsFamily,
@@ -93,7 +141,7 @@ fun HomePage(navController: NavController) {
 fun HomePagePreview(){
 
     HomePage(
-        navController = TestNavHostController(LocalContext.current)
+        navController = FakeNavController(LocalContext.current)
     )
 
 }
