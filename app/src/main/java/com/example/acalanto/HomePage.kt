@@ -122,7 +122,7 @@ fun HomePage(navController: NavController) {
                 .padding(24.dp)
         )
         Button(
-            onClick = { navController.navigate("music") },
+            onClick = { navController.navigate(Screen.Music.route) },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF6C0AF)),
             modifier = Modifier
                 .size(193.dp, 63.dp)
