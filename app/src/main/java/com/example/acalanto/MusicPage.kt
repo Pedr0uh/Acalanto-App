@@ -49,99 +49,101 @@ fun MusicPage(navController: NavController){
         modifier = Modifier
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
-    ) {
+        verticalArrangement = Arrangement.SpaceAround
+    ){
 
-        Spacer(modifier = Modifier.height(52.dp))
+        Column(
+            modifier = Modifier,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
+        ) {
+
+            Spacer(modifier = Modifier.height(52.dp))
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+
+                ) {
+                Image(
+                    painter = painterResource(R.drawable.image),
+                    contentDescription = "Logo de Flor",
+                    modifier = Modifier
+                        .size(50.dp)
+                )
+                Spacer(
+                    modifier = Modifier
+                        .height(15.dp)
+                )
+                Text(
+                    text = stringResource(R.string.app_name),
+                    fontFamily = poppinsFamily,
+                    fontSize = 20.sp
+                )
+            }
+        }
 
         Column(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Center
+        ) {
 
-            ) {
-            Image(
-                painter = painterResource(R.drawable.image),
-                contentDescription = "Logo de Flor",
-                modifier = Modifier
-                    .size(50.dp)
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(15.dp)
-            )
+            Box {
+                Image(
+                    painter = painterResource(R.drawable.imagemusc),
+                    contentDescription = "capa da música",
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(15.dp))
+                        .size(180.dp),
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
             Text(
-                text = stringResource(R.string.app_name),
+                text = "musica - autor",
                 fontFamily = poppinsFamily,
-                fontSize = 20.sp
+                fontSize = 17.sp
             )
-        }
-    }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Box {
-            Image(
-                painter = painterResource(R.drawable.imagemusc),
-                contentDescription = "capa da música",
-                modifier = Modifier
-                    .clip(RoundedCornerShape(15.dp))
-                    .size(200.dp),
-            )
-        }
+            Row {
+                Button(
+                    onClick = { },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF6C0AF)),
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.PlayArrow,
+                        contentDescription = "Play",
+                        tint = Color.Black
+                    )
+                }
 
-        Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(100.dp))
 
-        Text(
-            text = "musica - autor",
-            fontFamily = poppinsFamily,
-            fontSize = 17.sp
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Row {
-            Button(
-                onClick = { },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF6C0AF)),
-                modifier = Modifier
-                    .padding(horizontal = 8.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.PlayArrow,
-                    contentDescription = "Play",
-                    tint = Color.Black
-                )
-            }
-
-            Spacer(modifier = Modifier.height(100.dp))
-
-            Button(
-                onClick = { },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF6C0AF)),
-                modifier = Modifier
-                    .padding(horizontal = 8.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.SkipNext,
-                    contentDescription = "Próxima música",
-                    tint = Color.Black
-                )
+                Button(
+                    onClick = { },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF6C0AF)),
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.SkipNext,
+                        contentDescription = "Próxima música",
+                        tint = Color.Black
+                    )
+                }
             }
         }
-
-
-
     }
 }
-
-
 
 @Preview(
     showSystemUi = true,
