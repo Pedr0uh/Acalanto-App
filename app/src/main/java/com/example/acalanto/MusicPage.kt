@@ -98,7 +98,7 @@ fun MusicPage(navController: NavController){
                     contentDescription = "capa da música",
                     modifier = Modifier
                         .clip(RoundedCornerShape(15.dp))
-                        .size(180.dp),
+                        .size(200.dp),
                 )
             }
 
@@ -137,7 +137,8 @@ fun MusicPage(navController: NavController){
                     Icon(
                         imageVector = Icons.Default.SkipNext,
                         contentDescription = "Próxima música",
-                        tint = Color.Black
+                        tint = Color.Black,
+
                     )
                 }
             }
