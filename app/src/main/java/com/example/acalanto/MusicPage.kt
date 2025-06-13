@@ -35,14 +35,103 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.ui.graphics.Color
 import androidx.compose.material.icons.filled.SkipNext
+import android.media.MediaPlayer
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.*
+import androidx.compose.material3.Slider
+import androidx.compose.material.icons.filled.Pause
 
 @Composable
 fun MusicPage(navController: NavController) {
+
+    data class Musica(
+        val nome: String,
+        val capaResId: Int,
+        val audioRedId: Int
+            )
+
+    val musicas = listOf(
+
+        Musica(
+            nome = "And I Love Her - The Beatles",
+            capaResId = R.drawable.beatles,
+            audioRedId = R.raw.and_i_love_her
+        ),
+        Musica(
+            nome = "Don´t Forget - Laura Shigihara",
+            capaResId = R.drawable.delta,
+            audioRedId = R.raw.dont_forget
+        ),
+        Musica(
+            nome = "Heart To Heart - Mac DeMarco",
+            capaResId = R.drawable.health,
+            audioRedId = R.raw.heart_to_heart
+        ),
+        Musica(
+            nome = "Novo Amor - Anchor",
+            capaResId = R.drawable.anchor,
+            audioRedId = R.raw.novo_amor_anchor
+        ),
+        Musica(
+            nome = "Saitama Theme (Ballad Version)",
+            capaResId = R.drawable.hero,
+            audioRedId = R.raw.saitama_theme
+        ),
+        Musica(
+            nome = "Unpacking - End Credits",
+            capaResId = R.drawable.unpacking,
+            audioRedId = R.raw.unpacking_end_credits
+        )
+    )
 
     val poppinsFamily = remember {
         FontFamily(
             Font(R.font.poppins_regular, FontWeight.Normal)
         )
+    }
+
+    val context = LocalContext.current
+    var musicaAtualIndex by remember { mutableStateOf(0) }
+    var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+    var tocando by remember { mutableStateOf(false) }
+
+    var posicaoAtual: Float by remember { mutableStateOf(0f) }
+    var duracaoTotal by remember { mutableStateOf(1f) }
+
+    fun tocarMusica() {
+
+        if (mediaPlayer == null) {
+            val musica = musicas[musicaAtualIndex]
+            mediaPlayer = MediaPlayer.create(context, musica.audioRedId)
+            duracaoTotal = (mediaPlayer?.duration?.toFloat() ?: 1f) / 1000f
+        }
+
+        mediaPlayer?.start()
+        tocando = true
+
+    }
+
+    fun proximaMusica(){
+
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+
+        musicaAtualIndex = (musicaAtualIndex + 1) % musicas.size
+
+        val novaMusica = musicas[musicaAtualIndex]
+        mediaPlayer = MediaPlayer.create(context, novaMusica.audioRedId)
+        duracaoTotal = (mediaPlayer?.duration?.toFloat() ?: 1f) / 1000f
+        mediaPlayer?.start()
+        tocando = true
+
+    }
+
+    fun pausarMusica(){
+
+        mediaPlayer?.pause()
+        tocando = false
+
     }
 
     Column(
@@ -94,7 +183,7 @@ fun MusicPage(navController: NavController) {
 
             Box {
                 Image(
-                    painter = painterResource(R.drawable.imagemusc),
+                    painter = painterResource(id = musicas[musicaAtualIndex].capaResId),
                     contentDescription = "capa da música",
                     modifier = Modifier
                         .clip(RoundedCornerShape(15.dp))
@@ -105,31 +194,47 @@ fun MusicPage(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "musica - autor",
+                text = musicas[musicaAtualIndex].nome,
                 fontFamily = poppinsFamily,
                 fontSize = 17.sp
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Slider(
+                value = posicaoAtual,
+                onValueChange = {
+                    posicaoAtual = it
+                    mediaPlayer?.seekTo((it * 1000).toInt())
+                },
+                valueRange = 0f..duracaoTotal,
+                modifier = Modifier.fillMaxWidth(0.8f)
+            )
 
             Row {
                 Button(
-                    onClick = { },
+                    onClick = {
+                        if(tocando){
+                            pausarMusica()
+                        }else {
+                            tocarMusica()
+                        }
+                    },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF6C0AF)),
                     modifier = Modifier
                         .padding(horizontal = 8.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.PlayArrow,
-                        contentDescription = "Play",
+                        imageVector = if (tocando) Icons.Default.Pause else Icons.Default.PlayArrow,
+                        contentDescription = if (tocando) "Pausar" else "Tocar",
                         tint = Color.Black
                     )
                 }
 
-                Spacer(modifier = Modifier.height(100.dp))
+                Spacer(modifier = Modifier.width(24.dp))
 
                 Button(
-                    onClick = { },
+                    onClick = { proximaMusica() },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF6C0AF)),
                     modifier = Modifier
                         .padding(horizontal = 8.dp)
@@ -138,8 +243,13 @@ fun MusicPage(navController: NavController) {
                         imageVector = Icons.Default.SkipNext,
                         contentDescription = "Próxima música",
                         tint = Color.Black,
-
                         )
+                }
+            }
+            LaunchedEffect(tocando, mediaPlayer) {
+                while (tocando && mediaPlayer != null) {
+                    posicaoAtual = (mediaPlayer?.currentPosition?.toFloat() ?: 0f) / 1000f
+                    kotlinx.coroutines.delay(500)
                 }
             }
         }
