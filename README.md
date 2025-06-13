@@ -42,7 +42,7 @@ Ideal para ouvir músicas calmas, refletir, relaxar ou simplesmente descansar um
 
 ---
 
-##📌 Observações
+## 📌 Observações
 
     Este projeto foi criado com fins educacionais, como parte do meu aprendizado em Android Studio com Jetpack Compose.
     Todas as músicas são utilizadas apenas para fins de estudo, sem fins lucrativos.
