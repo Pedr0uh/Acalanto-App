@@ -14,18 +14,18 @@ sealed class Screen(val route: String) {
 }
 
 @Composable
-fun Navigation(navController: NavHostController = rememberNavController()){
+fun Navigation(navController: NavHostController = rememberNavController()) {
     NavHost(
         navController = navController,
         startDestination = Screen.Splash.route
-    ){
-        composable(Screen.Splash.route){
+    ) {
+        composable(Screen.Splash.route) {
             SplashPage(navController = navController)
         }
-        composable(Screen.Home.route){
+        composable(Screen.Home.route) {
             HomePage(navController = navController)
         }
-        composable(Screen.Music.route){
+        composable(Screen.Music.route) {
             MusicPage(navController = navController)
         }
     }

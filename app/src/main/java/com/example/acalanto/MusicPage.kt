@@ -37,7 +37,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.material.icons.filled.SkipNext
 
 @Composable
-fun MusicPage(navController: NavController){
+fun MusicPage(navController: NavController) {
 
     val poppinsFamily = remember {
         FontFamily(
@@ -50,7 +50,7 @@ fun MusicPage(navController: NavController){
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround
-    ){
+    ) {
 
         Column(
             modifier = Modifier,
@@ -139,7 +139,7 @@ fun MusicPage(navController: NavController){
                         contentDescription = "Próxima música",
                         tint = Color.Black,
 
-                    )
+                        )
                 }
             }
         }
@@ -151,7 +151,7 @@ fun MusicPage(navController: NavController){
     showBackground = true
 )
 @Composable
-fun MusicPreview(){
+fun MusicPreview() {
     MusicPage(
         navController = FakeNavController(LocalContext.current)
     )

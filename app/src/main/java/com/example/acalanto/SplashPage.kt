@@ -26,7 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashPage(navController: NavController){
+fun SplashPage(navController: NavController) {
 
     val poppinsFamily = remember {
         FontFamily(
@@ -39,7 +39,7 @@ fun SplashPage(navController: NavController){
             .fillMaxSize()
             .background(Color(0XFFFFFEFC)),
         contentAlignment = Alignment.Center
-    ){
+    ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -70,7 +70,7 @@ fun SplashPage(navController: NavController){
     showBackground = true
 )
 @Composable
-fun SplashPreview(){
+fun SplashPreview() {
     SplashPage(
         navController = FakeNavController(LocalContext.current)
     )
